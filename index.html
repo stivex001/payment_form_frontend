@@ -2,54 +2,12 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Registration form</title>
-    <link rel="stylesheet" href="style.css" />
+    <title>Payment</title>
   </head>
   <body>
-    <main>
-      <div class="container grid">
-        <section class="hero-text">
-          <h1>Learn to code by watching others</h1>
-          <p>
-            See how experienced developers solve problems in real-time. Watching
-            scripted tutorials is great, but understanding how developers think
-            is invaluable.
-          </p>
-        </section>
-        <section>
-          <p class="free-trial">
-            <strong>Try it free 7 days</strong> then $20/mo. thereafter
-          </p>
-          <form class="form" novalidate>
-            <section class="input-wrapper">
-              <div>
-                <span class="error-img error-img-firstname"><img src="./images/icon-error.svg" alt="" /></span>
-                <input type="text" name="firstname" id="firstname" placeholder="First Name" data-name="First Name" required />
-                <span class="firstname error"></span>
-              </div>
-              <div>
-                <span class="error-img error-img-lastname"><img src="./images/icon-error.svg" alt="" /></span>
-                <input type="text" name="lastname" id="lastname" placeholder="Last Name" data-name="Last Name" required />
-                <span class="lastname error"></span>
-              </div>
-              <div>
-                <span class="error-img error-img-email"><img src="./images/icon-error.svg" alt="" /></span>
-                <input type="email" name="email" id="email" placeholder="Email Address" required />
-                <span class="email error"></span>
-              </div>
-              <div>
-                <span class="error-img error-img-password"><img src="./images/icon-error.svg" alt="" /></span>
-                <input type="password" name="password" id="password" placeholder="Password" data-name="Password" required />
-                <span class="password error"></span>
-              </div>
-            </section>
-            <button type="submit">Clam your free trial</button>
-            <p><span>By clicking the button, you are agreeing to our</span> <strong>Terms and Services</strong></p>
-          </form>
-        </section>
-      </div>
-    </main>
+    <div id="root"></div>
+    <script type="module" src="/src/main.jsx"></script>
   </body>
 </html>
