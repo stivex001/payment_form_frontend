@@ -32,6 +32,7 @@ const Payment = () => {
   const [expiryValid, setExpiryValid] = useState(false);
   const [cvvValid, setCvvValid] = useState(false);
   const [paymentSuccessful, setPaymentSuccessful] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -163,35 +164,42 @@ const Payment = () => {
   useEffect(() => {
     if (
       (formInputs.number.length === 16 ||
-      formInputs.number.startsWith("34") ||
-      formInputs.number.startsWith("37"))&& luhnCheck(formInputs.number)
+        formInputs.number.startsWith("34") ||
+        formInputs.number.startsWith("37")) &&
+      luhnCheck(formInputs.number)
     ) {
       setValidError(false);
-      setCardValid(true)
+      setCardValid(true);
     } else {
       setValidError(true);
-      setCardValid(false)
+      setCardValid(false);
     }
   }, [formInputs.number]);
 
   const handlePayment = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     if (!cardValid || !nameValid || expiryError) {
       toast.error("Invalid Credit Card Kindly try again!");
+      setIsLoading(false);
       return;
     }
 
     try {
-      const response = await axios.post("https://payment-api-ps0k.onrender.com/api/payment", {
-        cardNumber: formInputs.number,
-        cardHolder: formInputs.name,
-        expiryDate: formInputs.expiry,
-        cvv: formInputs.cvc,
-      });
+      const response = await axios.post(
+        "https://payment-api-ps0k.onrender.com/api/payment",
+        {
+          cardNumber: formInputs.number,
+          cardHolder: formInputs.name,
+          expiryDate: formInputs.expiry,
+          cvv: formInputs.cvc,
+        }
+      );
       if (response.status === 201) {
         setPaymentSuccessful(true);
+        setIsLoading(false);
       }
-      console.log(response);
+      console.log(response.data);
       setFormInputs({
         number: "",
         expiry: "",
@@ -295,7 +303,9 @@ const Payment = () => {
             {cvvValid && <FaCheck color="green" />}
           </Label>
 
-          <Button type="submit">Confirm Payment</Button>
+          <Button type="submit">
+            {isLoading ? "Processing...." : "Confirm Payment"}
+          </Button>
         </FormWrapper>
       </Wrapper>
       <ToastContainer />
