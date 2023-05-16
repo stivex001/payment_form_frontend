@@ -51,6 +51,7 @@ const Payment = () => {
     if (name === "number" && value.length < 16) {
       setCardValid(false);
       setValidError(true);
+      
     } else {
       setCardValid(true);
       setValidError(false);
@@ -161,20 +162,20 @@ const Payment = () => {
   };
 
   //   update the cardValid state when the card number is completed
-  useEffect(() => {
-    if (
-      (formInputs.number.length === 16 ||
-        formInputs.number.startsWith("34") ||
-        formInputs.number.startsWith("37")) &&
-      luhnCheck(formInputs.number)
-    ) {
-      setValidError(false);
-      setCardValid(true);
-    } else {
-      setValidError(true);
-      setCardValid(false);
-    }
-  }, [formInputs.number]);
+  // useEffect(() => {
+  //   if (
+  //     (formInputs.number.length === 16 ||
+  //       formInputs.number.startsWith("34") ||
+  //       formInputs.number.startsWith("37")) &&
+  //     luhnCheck(formInputs.number)
+  //   ) {
+  //     setValidError(false);
+  //     setCardValid(true);
+  //   } else {
+  //     setValidError(true);
+  //     setCardValid(false);
+  //   }
+  // }, [formInputs.number]);
 
   const handlePayment = async (e) => {
     e.preventDefault();
@@ -199,7 +200,7 @@ const Payment = () => {
         setPaymentSuccessful(true);
         setIsLoading(false);
       }
-      console.log(response.data);
+      console.log(response);
       setFormInputs({
         number: "",
         expiry: "",
